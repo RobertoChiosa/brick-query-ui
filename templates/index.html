@@ -8,7 +8,7 @@
     <link rel="stylesheet" type="text/css" href="../static/codemirror/theme/base16-light.css">
     <script src="../static/codemirror/lib/codemirror.js"></script>
     <script src="../static/codemirror/mode/sparql/sparql.js"></script>
-    <script src="../static/codemirror/mode/turtle/turtle.js"></script>
+    <script src="../static/codemirror/mode/javascript/javascript.js"></script>
     <script src="../static/codemirror/addon/edit/closebrackets.js"></script>
     <script src="../static/codemirror/addon/edit/closetag.js"></script>
     <script src="../static/codemirror/addon/edit/matchbrackets.js"></script>
@@ -52,7 +52,8 @@
         <div class="col-lg-6">
             <h4>Result</h4>
             <p>The following is the result.</p>
-            <textarea id="result" name="query_result_text" class="form-control" rows="10">{{ query_result_text }}</textarea>
+            <textarea id="result" name="query_result_text" class="form-control"
+                      rows="10">{{ query_result_text }}</textarea>
         </div>
     </div>
 
@@ -70,9 +71,11 @@
 
     var result = CodeMirror.fromTextArea(
         document.getElementById('result'), {
-            mode: 'turtle',
+            mode: 'javascript',
             theme: 'base16-light',
-            lineNumbers: true
+            lineNumbers: true,
+            autoCloseBrackets: true,
+            matchBrackets: true
         })
 </script>
 
