@@ -3,7 +3,15 @@
 
 <head>
     <title>Python Flask Brick Query UI</title>
-    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" href="../static/codemirror/lib/codemirror.css">
+    <link rel="stylesheet" type="text/css" href="../static/codemirror/theme/base16-light.css">
+    <script src="../static/codemirror/lib/codemirror.js"></script>
+    <script src="../static/codemirror/mode/sparql/sparql.js"></script>
+    <script src="../static/codemirror/mode/turtle/turtle.js"></script>
+    <script src="../static/codemirror/addon/edit/closebrackets.js"></script>
+    <script src="../static/codemirror/addon/edit/closetag.js"></script>
+    <script src="../static/codemirror/addon/edit/matchbrackets.js"></script>
 </head>
 
 <body>
@@ -27,33 +35,47 @@
         <p>An easy user interface to inspect brick queries on ttl files</p>
     </div>
 
+
     <div class="row marketing">
         <div class="col-lg-6">
             <h4>Query</h4>
             <p>Type your query.</p>
 
-            <form class="form-signin">
-                    <textarea id="query" name="query" class="form-control" placeholder="SPARQL query..." cols="30"
-                              rows="10">
-SELECT ?x WHERE {
-    ?x a <urn:ex:AirConnection>
-}</textarea>
+            <form method="POST" action='/query'>
+                <textarea id="query_editor" name="query_editor_text" class="form-control" rows="10">
+{{ query_editor_text }}</textarea>
                 <br/>
-                <button id="btnSignUp" class="btn btn-lg btn-primary btn-block" type="button">Go</button>
+                <button id="submit" class="btn btn-primary" type="submit">Go</button>
             </form>
         </div>
 
         <div class="col-lg-6">
             <h4>Result</h4>
             <p>The following is the result.</p>
-            <form class="form-signin">
-                <textarea id="turtlefile" name="turtlefile" class="form-control" cols="30" rows="10"></textarea>
+            <textarea id="result" name="query_result_text" class="form-control" rows="10">{{ query_result_text }}</textarea>
         </div>
     </div>
 
 
 </div>
-<script src="static/js/app.js"></script>
+<script type="text/javascript">
+    var query_editor = CodeMirror.fromTextArea(
+        document.getElementById('query_editor'), {
+            mode: 'sparql',
+            theme: 'base16-light',
+            lineNumbers: true,
+            autoCloseBrackets: true,
+            matchBrackets: true
+        })
+
+    var result = CodeMirror.fromTextArea(
+        document.getElementById('result'), {
+            mode: 'turtle',
+            theme: 'base16-light',
+            lineNumbers: true
+        })
+</script>
+
 </body>
 
 </html>
