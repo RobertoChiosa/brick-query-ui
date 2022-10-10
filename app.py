@@ -1,6 +1,8 @@
-import rdflib
-from flask import Flask, render_template, request, jsonify
 import json
+
+import rdflib
+from flask import Flask, render_template, request
+
 app = Flask(__name__, static_url_path='/static')
 
 
@@ -13,6 +15,11 @@ def main():
   	?sat  a  brick:Supply_Air_Temperature_Sensor .
 }"""
     return render_template('index.html', query_editor_text=query_editor_text)
+
+
+@app.route("/help")
+def help():
+    return render_template('help.html')
 
 
 @app.route("/query", methods=['POST', 'GET'])
