@@ -18,21 +18,20 @@ def main():
 
 
 @app.route("/help")
-def help():
+def helpPage():
     return render_template('help.html')
 
 
-@app.route("/query", methods=['POST', 'GET'])
+@app.route("/query", methods=['POST'])
 def query():
-    if request.method == 'POST':
-        query_editor_text = request.form['query_editor_text']  # keep the query on editor
+    query_editor_text = request.form['query_editor_text']  # keep the query on editor
 
-        g = rdflib.Graph()
-        g.parse('brick-query-ui/static/ttl/dbc_brick_expanded.ttl', format='ttl')
-        res = g.query(request.form['query_editor_text'])
-        res_dict = [dict(item) for item in res.bindings]
+    g = rdflib.Graph()
+    g.parse('brick-query-ui/static/ttl/dbc_brick_expanded.ttl', format='ttl')
+    res = g.query(request.form['query_editor_text'])
+    res_dict = [dict(item) for item in res.bindings]
 
-        query_result_text = json.dumps(res_dict, indent=1)
+    query_result_text = json.dumps(res_dict, indent=1)
 
     return render_template('index.html', query_editor_text=query_editor_text, query_result_text=query_result_text)
 

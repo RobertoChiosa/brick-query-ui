@@ -32,11 +32,74 @@
     <div class="jumbotron text-center">
         <h1>Brick Query UI</h1>
         <p>An easy user interface to inspect brick queries on ttl files</p>
+
+
     </div>
     <div class="row marketing">
-        <div class="col-lg-6">
+        <div class="col-lg-12">
             <h4>Help</h4>
-            <p>The following is the result.</p>
+            <p>
+                This repository contains a Flask application used to perform interactive queries on a Brick ontology
+                semantic model. The objective is to provide a quick and easy way to write validate and perform queries.
+
+            <h4>Setup</h4>
+
+            First of all install equired pachages from the requirement files.
+
+            <code>
+                pip install -r requirements.txt
+            </code>
+
+            <h4> Local deployment</h4>
+
+            Run flask application with the following command
+
+            <code>
+                flask run
+            </code>
+
+            You should see something like this
+
+            <code>
+                * Environment: production
+                * Debug mode: off
+                * Running on http://127.0.0.1:5000/ (Press CTRL+C to quit)
+            </code>
+
+            Now visit the `http://127.0.0.1:5000/` url to access the flask application.
+
+            <h4> Docker deployment</h4>
+
+            The script folder contains some shell scripts useful to deploy the flask application using Docker. Execute
+            the `start.sh` script to create the Docker image and build a container from the resulting image:
+
+            <code>
+                bash scripts/start.sh
+            </code>
+
+            Once the script finishes running, use the following command to list all running containers:
+
+            <code>
+                docker ps
+            </code>
+
+            <code>bash scripts/cleanup.sh</code>
+
+
+            <h4> Built with</h4>
+            <ol>
+                <li>CodeMirror</li>
+                <li>Brick</li>
+                <li>Bootstrap</li>
+                <li>Flask</li>
+            </ol>
+
+
+            <h4>Cite</h4>
+
+            <h4>License</h4>
+
+            </p>
         </div>
     </div>
 
