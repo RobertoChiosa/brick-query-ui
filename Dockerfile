@@ -1,6 +1,16 @@
-FROM tiangolo/uwsgi-nginx-flask:python3.8-alpine
-RUN apk --update add bash nano
-ENV STATIC_URL /static
-ENV STATIC_PATH /var/www/app/static
-COPY ./requirements.txt /var/www/requirements.txt
-RUN pip install -r /var/www/requirements.txt
+# start by pulling the python image
+FROM python:3.8-alpine
+
+# copy the requirements file into the image
+COPY requirements.txt requirements.txt
+
+# install the dependencies and packages in the requirements file
+RUN pip install -r requirements.txt
+
+# copy every content from the local file to the image
+COPY . .
+
+# configure the container to run in an executed manner
+ENTRYPOINT [ "python" ]
+
+CMD ["app.py" ]
